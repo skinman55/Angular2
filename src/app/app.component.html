@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ"
+    crossorigin="anonymous">
+
+</head>
+
+<body>
+
+
+  <nav class="navbar navbar-toggleable-md navbar-inverse bg-primary">
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+    <a class="navbar-brand" href="#">Navbar</a>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/stocks">Stocks</a>
+        </li>
+
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="text" placeholder="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
+    </div>
+  </nav>
+
+  <hr>
+  <div *ngIf="!submitted" class="container">
+    <h2 class="mt-2">Add New Stock</h2>
+    <div class="row">
+      <form novalidate #stockForm="ngForm" (ngSubmit)="onSubmit()">
+        <!-- Is It Valid? {{stockForm.form.valid}} -->
+        <div class="form-group">
+          <label for="stockName">Stock Name:</label>
+          <input type="text" id="stockName" name="stockName" [(ngModel)]="newStock.stockName" class="form-control" required #stockName="ngModel" />
+          <!-- CSS Class: {{stockName.valid}} , {{stockName.pristine}} -->
+
+          <div class="alert alert-danger" [hidden]="stockName.valid || stockName.pristine">
+            Please enter the value for the stockName.
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="stockCode">Stock Code:</label>
+          <input type="text" id="stockCode" name="stockCode" [(ngModel)]="newStock.stockCode" class="form-control" required ref-stockCode="ngModel"/>
+          <!-- CSS Class: {{stockCode.valid}} , {{stockCode.pristine}} -->
+        </div>
+
+        <div class="alert alert-danger" [hidden]="stockCode.valid || stockCode.pristine">
+            Please enter the value for the stockCode.
+          </div>
+
+        <button class="btn btn-primary" type="submit" [disabled]="!stockForm.form.valid">Submit </button>
+
+      </form>
+    </div>
+  </div>
+
+  <div *ngIf="submitted" class="container">
+    <h2>Submitted:</h2>
+    <div clas='form-group row'>
+      <label class="col-md-2 col-form-label"> Stock Name:</label>
+      <div class="col-md-10">
+        <input type="text" class="form-control" placeholder="{{newStock.stockName}}" readonly>
+      </div>
+    </div>
+
+    <div clas='form-group row'>
+      <label class="col-md-2 col-form-label"> Stock Code:</label>
+      <div class="col-md-10">
+         <input type="text" class="form-control" placeholder="{{newStock.stockCode}}" readonly>
+      </div>
+    </div>
+
+    <div clas='form-group row'>
+      <button class="btn btn-primary mt-2" (click)="cancel()">Cancel</button>
+    </div>
+
+  </div>
+
+  <router-outlet></router-outlet>
+
+  <!-- jQuery first, then Tether, then Bootstrap JS. -->
+  <!-- <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script> -->
+</body>
+
+</html>
+
+<!--Old Code Samples-->
+<!-- 
+<ngb-alert>
+    Random Alert Message
+</ngb-alert> -->
+
+<!--
+
+<p>
+    <ngb-alert [dismissible]="false">
+      <strong>Warning!</strong> Better check yourself, you're not looking too good.
+    </ngb-alert>
+  </p>
+
+{{today | date: "dd/MMM/yyyy hh:mm a"}}
+
+<h1 myHighlight> 
+  {{title}}
+</h1> -->
+
+
+<!-- <stocks>
+</stocks> -->
+
+<!-- <p myHighlight>This one has  highlight</p>
+
+<p myHighlight style="color:white">This one has highlight </p> -->
+
+
+<!--old style (angular 2)-->
+<!-- <div *ngIf="profile">
+    Name: {{profile.name}}
+</div>
+
+<div *ngIf="!profile">
+    No Profile Found!
+</div> -->
+
+
+<!--new  style (angular 4)-->
+<!-- <div *ngIf="profile else noProfileFound">
+    Name: {{profile.name}}
+</div>
+
+<ng-template #noProfileFound>
+  No Profile Found with Ng-Template
+</ng-template> -->
